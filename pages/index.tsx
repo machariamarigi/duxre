@@ -6,12 +6,13 @@ import {
   decrement,
   increment,
   incrementByAmount,
+  selectValue,
 } from "../store/slices/counterSlice";
 import { RootState } from "../store/store";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  const count = useSelector((state: RootState) => state.counter.value);
+  const count = useSelector((state: RootState) => selectValue);
   const dispatch = useDispatch();
 
   return (
