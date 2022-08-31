@@ -2,7 +2,7 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import counterReducer from "./slices/counterSlice";
 import pokemonReducer from "./slices/pokemonSlice";
 
-export const store = configureStore({
+export let store = configureStore({
   reducer: {
     counter: counterReducer,
     pokemon: pokemonReducer,
@@ -18,3 +18,15 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+export default function getStore(preloadedState?: RootState) {
+  store = configureStore({
+    reducer: {
+      counter: counterReducer,
+      pokemon: pokemonReducer,
+    },
+    preloadedState,
+  });
+
+  return store;
+}

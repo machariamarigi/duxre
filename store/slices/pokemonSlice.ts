@@ -35,18 +35,12 @@ export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
   reducers: {
-    rehydrate(state, action: PayloadAction<PokemonState>) {
-      state.error = action.payload.error;
-      state.pending = action.payload.pending;
-      state.pokemon = action.payload.pokemon;
-      state.filteredPokemon = action.payload.filteredPokemon;
-      state.search = action.payload.search;
-    },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
-      state.filteredPokemon = state.pokemon.filter(({ name }) => {
-        name.toLowerCase().includes(state.search.toLowerCase());
-      });
+      state.filteredPokemon = state.pokemon.filter(({ name }) =>
+        name.toLowerCase().includes(state.search.toLowerCase())
+      );
+
     },
   },
   extraReducers(builder) {
@@ -65,7 +59,7 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { rehydrate, setSearch } = pokemonSlice.actions;
+export const { setSearch } = pokemonSlice.actions;
 
 export const selectSearch = (state: RootState) => state.pokemon.search;
 export const selectFilteredPokemon = (state: RootState) =>
